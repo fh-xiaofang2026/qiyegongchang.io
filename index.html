@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>企业工厂消防安全手册</title>
+<style>
+  :root{
+    --red:#C8102E;
+    --red-dark:#9B0C23;
+    --ink:#1A1A1A;
+    --gray:#5A5A5A;
+    --line:#E2DFD8;
+    --bg:#F7F6F2;
+    --paper:#FFFFFF;
+    --amber:#E8A317;
+    --green:#2F7D4F;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.75;font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* ===== 顶部封面 ===== */
+  .cover{
+    background:linear-gradient(135deg,#1A1A1A 0%,#2A1216 60%,#3D0A14 100%);
+    color:#fff;padding:64px 24px 56px;position:relative;overflow:hidden;
+  }
+  .cover::before{
+    content:"";position:absolute;right:-80px;top:-80px;width:320px;height:320px;
+    border:2px solid rgba(200,16,46,.35);border-radius:50%;
+  }
+  .cover::after{
+    content:"";position:absolute;right:-40px;bottom:-120px;width:260px;height:260px;
+    border:1px solid rgba(232,163,23,.3);border-radius:50%;
+  }
+  .cover-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1}
+  .cover .badge{
+    display:inline-block;padding:4px 14px;border:1px solid rgba(255,255,255,.4);
+    font-size:13px;letter-spacing:4px;color:#E8A317;margin-bottom:24px;
+  }
+  .cover h1{
+    font-size:clamp(32px,6vw,56px);font-weight:900;letter-spacing:2px;
+    line-height:1.2;margin-bottom:16px;
+  }
+  .cover h1 .red{color:var(--red)}
+  .cover .sub{font-size:17px;color:#C9C4BC;max-width:640px;margin-bottom:32px}
+  .cover .meta{display:flex;gap:32px;flex-wrap:wrap;font-size:14px;color:#9A958C}
+  .cover .meta b{color:#fff;font-weight:600;display:block;font-size:15px;margin-top:2px}
+
+  /* ===== 布局 ===== */
+  .layout{
+    max-width:1100px;margin:0 auto;padding:32px 24px 80px;
+    display:grid;grid-template-columns:220px 1fr;gap:40px;
+  }
+  /* 侧边目录 */
+  .toc{
+    position:sticky;top:24px;align-self:start;
+    background:var(--paper);border:1px solid var(--line);border-radius:4px;
+    padding:20px 0;
+  }
+  .toc-title{
+    font-size:13px;letter-spacing:3px;color:var(--gray);
+    padding:0 20px 12px;border-bottom:1px solid var(--line);margin-bottom:8px;
+  }
+  .toc a{
+    display:block;padding:9px 20px;color:var(--ink);text-decoration:none;
+    font-size:14px;border-left:3px solid transparent;transition:.15s;
+  }
+  .toc a:hover{background:var(--bg);border-left-color:var(--red)}
+  .toc a .num{color:var(--red);font-weight:700;margin-right:8px;font-size:13px}
+
+  /* 正文 */
+  .content{min-width:0}
+  section{
+    background:var(--paper);border:1px solid var(--line);border-radius:4px;
+    padding:36px 40px;margin-bottom:28px;scroll-margin-top:20px;
+  }
+  .chap-num{
+    font-size:13px;color:var(--red);font-weight:700;letter-spacing:2px;
+    margin-bottom:8px;
+  }
+  h2{
+    font-size:26px;font-weight:800;margin-bottom:20px;padding-bottom:14px;
+    border-bottom:2px solid var(--ink);letter-spacing:1px;
+  }
+  h3{
+    font-size:18px;font-weight:700;margin:28px 0 12px;
+    padding-left:12px;border-left:4px solid var(--red);
+  }
+  p{margin-bottom:12px;color:var(--ink)}
+  ul,ol{margin:8px 0 16px 24px}
+  li{margin-bottom:6px}
+  strong{color:var(--red-dark)}
+
+  /* 提示框 */
+  .tip{
+    background:#FFF7E8;border-left:4px solid var(--amber);
+    padding:14px 18px;border-radius:0 4px 4px 0;margin:16px 0;font-size:15px;
+  }
+  .tip.red{background:#FDECEE;border-left-color:var(--red)}
+  .tip.green{background:#EAF5EE;border-left-color:var(--green)}
+  .tip b{display:block;margin-bottom:4px}
+
+  /* 卡片网格 */
+  .grid{display:grid;gap:16px;margin:18px 0}
+  .grid-2{grid-template-columns:repeat(2,1fr)}
+  .grid-3{grid-template-columns:repeat(3,1fr)}
+  .card{
+    border:1px solid var(--line);border-radius:4px;padding:18px;
+    background:var(--bg);
+  }
+  .card h4{font-size:15px;font-weight:700;margin-bottom:8px;color:var(--red-dark)}
+  .card p{font-size:14px;color:var(--gray);margin:0}
+
+  /* 表格 */
+  table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+  th{background:var(--ink);color:#fff;font-weight:600}
+  tr:nth-child(even) td{background:#FAF9F6}
+
+  /* 步骤时间线 */
+  .steps{margin:18px 0;padding-left:0;list-style:none}
+  .steps li{
+    position:relative;padding:0 0 20px 44px;border-left:2px solid var(--line);
+    margin-left:14px;
+  }
+  .steps li:last-child{border-left-color:transparent;padding-bottom:0}
+  .steps li::before{
+    content:attr(data-n);
+    position:absolute;left:-15px;top:0;width:28px;height:28px;
+    background:var(--red);color:#fff;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:700;
+  }
+  .steps b{display:block;margin-bottom:2px}
+
+  /* 火灾分类色块 */
+  .fire-class{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+  .fire-class .fc{
+    padding:16px;border-radius:4px;color:#fff;
+  }
+  .fc-a{background:#2F7D4F}.fc-b{background:#C8102E}.fc-c{background:#1F4E79}
+  .fc-d{background:#8B5A2B}.fc-e{background:#333}.fc-f{background:#E8A317;color:#1A1A1A}
+  .fc .label{font-size:20px;font-weight:900;margin-bottom:4px}
+  .fc .desc{font-size:13px;opacity:.92}
+
+  /* 页脚 */
+  footer{
+    text-align:center;padding:32px 20px;color:var(--gray);font-size:13px;
+    border-top:1px solid var(--line);
+  }
+
+  /* 移动端 */
+  @media (max-width:820px){
+    .layout{grid-template-columns:1fr;padding:20px 14px 60px}
+    .toc{position:static;display:none}
+    section{padding:24px 20px}
+    .grid-2,.grid-3{grid-template-columns:1fr}
+    .fire-class{grid-template-columns:repeat(2,1fr)}
+    .cover{padding:48px 20px 40px}
+  }
+  @media print{
+    .toc{display:none}
+    body{background:#fff}
+    section{break-inside:avoid;border:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- 封面 -->
+<header class="cover">
+  <div class="cover-inner">
+    <div class="badge">FIRE SAFETY HANDBOOK</div>
+    <h1>企业工厂<br><span class="red">消防安全</span>手册</h1>
+    <p class="sub">预防为主 · 防消结合 —— 全员必须熟知的火灾预防、报警、扑救与逃生知识。</p>
+    <div class="meta">
+      <div>适用范围<b>全厂各车间、部门、班组</b></div>
+      <div>版本<b>2026 版</b></div>
+      <div>培训对象<b>全体员工 / 新入职人员</b></div>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+
+  <!-- 目录 -->
+  <nav class="toc">
+    <div class="toc-title">目 录</div>
+    <a href="#c1"><span class="num">01</span>总则与消防责任</a>
+    <a href="#c2"><span class="num">02</span>火灾基础知识</a>
+    <a href="#c3"><span class="num">03</span>工厂常见火灾隐患</a>
+    <a href="#c4"><span class="num">04</span>消防设施与器材</a>
+    <a href="#c5"><span class="num">05</span>报警与初期扑救</a>
+    <a href="#c6"><span class="num">06</span>疏散与逃生自救</a>
+    <a href="#c7"><span class="num">07</span>应急组织与演练</a>
+    <a href="#c8"><span class="num">08</span>日常管理与检查</a>
+    <a href="#c9"><span class="num">09</span>应急联系与附录</a>
+  </nav>
+
+  <!-- 正文 -->
+  <main class="content">
+
+    <!-- 01 总则 -->
+    <section id="c1">
+      <div class="chap-num">CHAPTER 01</div>
+      <h2>总则与消防责任</h2>
+      <p>为贯彻"预防为主、防消结合"的方针，保障员工生命和公司财产安全，依据《中华人民共和国消防法》《机关、团体、企业、事业单位消防安全管理规定》，结合本厂实际，制定本手册。</p>
+      <h3>全员消防义务</h3>
+      <ul>
+        <li>任何人不得损坏、挪用或者擅自拆除、停用消防设施、器材，不得埋压、圈占、遮挡消火栓。</li>
+        <li>任何人不得占用、堵塞、封闭疏散通道、安全出口、消防车通道。</li>
+        <li>任何人发现火灾都应当立即报警；任何人员都应当无偿为报警提供便利，不得阻拦报警。</li>
+        <li>进入生产区、仓库、危化品区必须遵守动火审批、禁烟禁火、防静电等管理规定。</li>
+      </ul>
+      <div class="tip red">
+        <b>三懂四会</b>
+        三懂：懂本岗位火灾危险性、懂预防火灾措施、懂扑救火灾方法。<br>
+        四会：会报警、会使用消防器材、会扑救初期火灾、会组织疏散逃生。
+      </div>
+    </section>
+
+    <!-- 02 火灾基础 -->
+    <section id="c2">
+      <div class="chap-num">CHAPTER 02</div>
+      <h2>火灾基础知识</h2>
+      <h3>燃烧三要素</h3>
+      <p>发生燃烧必须同时具备<strong>可燃物、助燃物（氧气）、引火源（温度）</strong>，缺一不可。灭火的基本原理就是破坏其中任一要素：隔离、窒息、冷却、抑制。</p>
+      <h3>火灾分类（按可燃物性质）</h3>
+      <div class="fire-class">
+        <div class="fc fc-a"><div class="label">A 类</div><div class="desc">固体物质火灾：木材、纸张、棉布、塑料、橡胶等</div></div>
+        <div class="fc fc-b"><div class="label">B 类</div><div class="desc">液体或可熔化固体火灾：汽油、柴油、油漆、石蜡、沥青</div></div>
+        <div class="fc fc-c"><div class="label">C 类</div><div class="desc">气体火灾：煤气、天然气、氢气、乙炔等</div></div>
+        <div class="fc fc-d"><div class="label">D 类</div><div class="desc">金属火灾：钾、钠、镁、铝镁合金等可燃金属</div></div>
+        <div class="fc fc-e"><div class="label">E 类</div><div class="desc">带电火灾：电器、设备、线路带电燃烧</div></div>
+        <div class="fc fc-f"><div class="label">F 类</div><div class="desc">烹饪器具内烹饪物火灾：动植物油脂</div></div>
+      </div>
+      <div class="tip">
+        <b>关键认知</b>
+        不同类型火灾必须选用对应灭火剂。错用灭火器（如水基灭火器扑救带电火灾）非但不能灭火，还可能造成触电或火势扩大。
+      </div>
+      <h3>火灾发展阶段</h3>
+      <ul>
+        <li><strong>初起阶段（约3–5分钟）</strong>：火势小、烟温低，是扑救和逃生的黄金窗口。</li>
+        <li><strong>发展阶段</strong>：燃烧加剧，温度骤升，出现轰燃风险。</li>
+        <li><strong>猛烈阶段</strong>：全面燃烧，人已无法靠近，应立即撤离。</li>
+        <li><strong>衰减阶段</strong>：可燃物燃尽，应防止复燃。</li>
+      </ul>
+    </section>
+
+    <!-- 03 常见隐患 -->
+    <section id="c3">
+      <div class="chap-num">CHAPTER 03</div>
+      <h2>工厂常见火灾隐患</h2>
+      <p>工厂火灾多由以下隐患长期积累、疏于管理所致。每位员工应对照本岗位自查自纠。</p>
+      <div class="grid grid-2">
+        <div class="card"><h4>电气隐患</h4><p>线路老化、私拉乱接、超负荷用电、接线松动发热、违章使用大功率电器、配电箱堆物。</p></div>
+        <div class="card"><h4>动火作业</h4><p>未办动火证、周边易燃物未清理、无监火人、焊渣飞溅、气瓶距离不足。</p></div>
+        <div class="card"><h4>危化品存储</h4><p>易燃易爆品混存、超量存放、通风不良、无防泄漏措施、禁忌物相邻。</p></div>
+        <div class="card"><h4>消防通道堵塞</h4><p>疏散通道堆物、安全出口上锁、消防车通道被车辆占用、防火门常开被楔住。</p></div>
+        <div class="card"><h4>设备与热源</h4><p>设备轴承缺油过热、违章烘烤衣物、靠近热源堆放可燃物、未停机断电离岗。</p></div>
+        <div class="card"><h4>吸烟违章</h4><p>车间、仓库、危化品区吸烟或乱扔烟头；带火种进入防爆区域。</p></div>
+      </div>
+      <div class="tip red">
+        <b>隐患举报</b>
+        发现任何火灾隐患，有义务立即向班组长或安全员报告。紧急情况下可直接拨打厂区值班电话。隐患不消除，岗位不离开。
+      </div>
+    </section>
+
+    <!-- 04 设施器材 -->
+    <section id="c4">
+      <div class="chap-num">CHAPTER 04</div>
+      <h2>消防设施与器材</h2>
+      <h3>常用灭火器适用范围</h3>
+      <table>
+        <colgroup><col style="width:22%"><col style="width:38%"><col style="width:40%"></colgroup>
+        <thead><tr><th>灭火器类型</th><th>适用火灾</th><th>不适用 / 注意</th></tr></thead>
+        <tbody>
+          <tr><td>干粉灭火器（ABC类）</td><td>固体、液体、气体、带电设备初期火灾</td><td>不适用于金属火灾；扑救后需清理粉尘</td></tr>
+          <tr><td>二氧化碳灭火器</td><td>精密仪器、带电设备、贵重图书档案</td><td>不适用于金属；密闭空间使用注意窒息</td></tr>
+          <tr><td>水基型（水雾）灭火器</td><td>固体、液体、F类烹饪油</td><td>不可用于带电火灾（除标注可带电款）</td></tr>
+          <tr><td>泡沫灭火器</td><td>液体、固体火灾</td><td>不可用于带电设备、气体火灾</td></tr>
+          <tr><td>专用金属灭火器</td><td>D类可燃金属</td><td>须由专业人员操作</td></tr>
+        </tbody>
+      </table>
+      <h3>灭火器使用方法——提拔握压</h3>
+      <ol class="steps">
+        <li data-n="1"><b>提</b>手提灭火器提把，快速赶到火场（距燃烧物2–3米处）。</li>
+        <li data-n="2"><b>拔</b>拔掉保险销（铅封）。</li>
+        <li data-n="3"><b>握</b>一手握住喷管前端（二氧化碳灭火器握喇叭筒把手），另一手握住压把。</li>
+        <li data-n="4"><b>压</b>按下压把，对准火焰<strong>根部</strong>左右扫射，由近及远、快速推进。</li>
+      </ol>
+      <div class="tip">
+        <b>使用要点</b>
+        站在上风向；室外注意风向；先切断电源和气源；液体火不要直接冲击液面，防止飞溅蔓延。
+      </div>
+      <h3>室内消火栓</h3>
+      <ol>
+        <li>打开消火栓箱门（或击碎玻璃）。</li>
+        <li>取出水带、水枪，将水带向火场方向拉直铺设，避免弯折。</li>
+        <li>水带一端接消火栓接口，另一端接水枪。</li>
+        <li>至少两人配合：一人持枪出水，一人缓慢打开阀门。</li>
+      </ol>
+      <h3>其他设施</h3>
+      <ul>
+        <li><strong>手动报警按钮</strong>：发现火情时按下，向消防控制室报警。</li>
+        <li><strong>应急照明与疏散指示标志</strong>：停电时自动点亮，指示逃生方向，严禁遮挡。</li>
+        <li><strong>防火门</strong>：保持常闭，不得用异物楔住使其常开。</li>
+        <li><strong>消防控制室</strong>：24小时值班，接到报警后立即启动应急预案。</li>
+      </ul>
+    </section>
+
+    <!-- 05 报警与扑救 -->
+    <section id="c5">
+      <div class="chap-num">CHAPTER 05</div>
+      <h2>报警与初期火灾扑救</h2>
+      <h3>如何报火警</h3>
+      <p>发现火情后，按照"<strong>先报警、后扑救</strong>"原则，任何人应立即拨打火警电话。</p>
+      <ol class="steps">
+        <li data-n="1"><b>拨打 119</b>（厂内先打内部值班/消控室电话）。手机信号良好时直接拨119。</li>
+        <li data-n="2"><b>讲清地址</b>：XX市XX区XX路XX厂XX车间/仓库，附近标志性建筑。</li>
+        <li data-n="3"><b>讲清火情</b>：什么物质着火、火势大小、有无人员被困、有无爆炸危化品。</li>
+        <li data-n="4"><b>讲清联系方式</b>：留下报警人姓名和电话，保持畅通。</li>
+        <li data-n="5"><b>到路口接应</b>：派人到厂门口或路口引导消防车。</li>
+      </ol>
+      <div class="tip red">
+        <b>严禁</b>
+        不得谎报火警、不得阻拦报警；报警后不得擅自离开，消防队到达前应持续监控并准备接应。
+      </div>
+      <h3>初期火灾扑救原则</h3>
+      <ul>
+        <li><strong>先控制、后消灭</strong>：优先阻止火势蔓延，再消灭明火。</li>
+        <li><strong>救人第一</strong>：有人员受困时，优先组织疏散和救人，不可贪恋财物。</li>
+        <li><strong>先重点、后一般</strong>：先保护人员密集区、危化品区、重要设备，再处理一般物资。</li>
+        <li><strong>量力而行</strong>：火势超出初期范围、浓烟高温、有爆炸风险时，立即撤离，等待专业消防队。</li>
+      </ul>
+      <div class="tip">
+        <b>断电断气</b>
+        扑救带电火灾前先切断电源；气体火灾先关阀断气。无法切断时，使用对应灭火剂，严禁用水。
+      </div>
+    </section>
+
+    <!-- 06 疏散逃生 -->
+    <section id="c6">
+      <div class="chap-num">CHAPTER 06</div>
+      <h2>疏散与逃生自救</h2>
+      <h3>疏散逃生要领</h3>
+      <ol class="steps">
+        <li data-n="1"><b>保持冷静</b>：听到警报或发现火情，不要惊慌，听从现场指挥。</li>
+        <li data-n="2"><b>低姿匍匐</b>：用湿毛巾/衣物捂住口鼻，弯腰或匍匐前进（浓烟在上层，近地面残留新鲜空气）。</li>
+        <li data-n="3"><b>沿疏散指示</b>：就近向安全出口、疏散楼梯撤离，严禁乘坐普通电梯。</li>
+        <li data-n="4"><b>不乘电梯</b>：火灾时电梯可能断电停运或成为烟囱。</li>
+        <li data-n="5"><b>不返回</b>：撤离后不贪恋财物、不返回取物；清点人数由班组长负责。</li>
+      </ol>
+      <h3>被困室内自救</h3>
+      <ul>
+        <li>关闭迎火门窗，用湿布条塞住门缝，向门窗浇水降温。</li>
+        <li>在窗口挥舞鲜艳衣物或用手电筒发出求救信号，等待救援。</li>
+        <li>身上着火时<strong>就地打滚压灭火苗</strong>，切勿奔跑。</li>
+        <li>切勿盲目跳楼，三层以上应等待消防救援。</li>
+      </ul>
+      <div class="tip red">
+        <b>黄金法则</b>
+        起火时判断方向：若疏散路线被浓烟烈火封堵，立即退守有外窗、可密闭的房间，闭门待救，切勿强行穿越浓烟。
+      </div>
+    </section>
+
+    <!-- 07 应急组织 -->
+    <section id="c7">
+      <div class="chap-num">CHAPTER 07</div>
+      <h2>应急组织与演练</h2>
+      <h3>微型消防站 / 义务消防队</h3>
+      <p>厂内建立微型消防站，配备灭火器、水带、防护服、破拆工具，实行"3分钟到场"处置要求。成员由各班骨干组成，定期训练。</p>
+      <h3>应急小组分工</h3>
+      <table>
+        <thead><tr><th>小组</th><th>职责</th></tr></thead>
+        <tbody>
+          <tr><td>灭火行动组</td><td>利用就近器材扑救初期火灾，控制火势蔓延</td></tr>
+          <tr><td>疏散引导组</td><td>引导人员沿安全路线撤离，清点人数</td></tr>
+          <tr><td>通讯联络组</td><td>报警、对接消防队、通知应急指挥部</td></tr>
+          <tr><td>安全防护救护组</td><td>现场急救、联系120、护送伤员</td></tr>
+          <tr><td>后勤保障组</td><td>保障器材、电源、水源、车辆调度</td></tr>
+        </tbody>
+      </table>
+      <h3>演练要求</h3>
+      <ul>
+        <li>全厂综合消防演练<strong>每年至少1次</strong>。</li>
+        <li>车间/班组桌面推演或现场演练<strong>每半年至少1次</strong>。</li>
+        <li>新员工入职必须经过消防安全培训，方可上岗。</li>
+      </ul>
+    </section>
+
+    <!-- 08 日常管理 -->
+    <section id="c8">
+      <div class="chap-num">CHAPTER 08</div>
+      <h2>日常管理与检查</h2>
+      <h3>班前班后"五查"</h3>
+      <ol>
+        <li>查电源：设备、线路、开关是否正常，离岗是否断电。</li>
+        <li>查火源：有无违章动火、吸烟，周边可燃物是否清理。</li>
+        <li>查通道：疏散通道、安全出口是否畅通。</li>
+        <li>查器材：灭火器、消火栓是否在位完好、无遮挡。</li>
+        <li>查危化品：使用、存放是否规范，余量是否归位。</li>
+      </ol>
+      <h3>动火作业"六大禁令"</h3>
+      <div class="tip red">
+        <b>无证不动火 · 不清理周边易燃物不动火 · 无监火人不动火<br>
+        不分析动火环境不动火 · 没有防护措施不动火 · 消防器材不到位不动火</b>
+      </div>
+      <h3>定期检查内容</h3>
+      <ul>
+        <li>灭火器压力是否在绿区、是否在有效期、铅封是否完好（每月点检）。</li>
+        <li>消火栓、水带、水枪是否完好无缺失。</li>
+        <li>疏散指示标志、应急照明是否正常。</li>
+        <li>电气线路、开关、配电箱是否无发热、无私拉乱接。</li>
+        <li>危化品库房通风、温度、防爆电气是否完好。</li>
+      </ul>
+    </section>
+
+    <!-- 09 附录 -->
+    <section id="c9">
+      <div class="chap-num">CHAPTER 09</div>
+      <h2>应急联系与附录</h2>
+      <h3>紧急电话</h3>
+      <table>
+        <thead><tr><th>用途</th><th>电话</th></tr></thead>
+        <tbody>
+          <tr><td>火警</td><td><strong>119</strong></td></tr>
+          <tr><td>急救</td><td><strong>120</strong></td></tr>
+          <tr><td>报警</td><td><strong>110</strong></td></tr>
+          <tr><td>交通事故</td><td><strong>122</strong></td></tr>
+          <tr><td>厂区消防控制室 / 值班</td><td>（按本厂实际填写）</td></tr>
+          <tr><td>安全环保部</td><td>（按本厂实际填写）</td></tr>
+        </tbody>
+      </table>
+      <h3>员工须知</h3>
+      <ul>
+        <li>熟记本岗位疏散路线和最近两个安全出口位置。</li>
+        <li>熟记就近灭火器、消火栓、报警按钮位置。</li>
+        <li>熟记班组长、安全员、消控室电话。</li>
+        <li>参加每一次消防培训和演练，不走过场。</li>
+      </ul>
+      <div class="tip green">
+        <b>安全寄语</b>
+        消防安全无小事，隐患险于明火，防范胜于救灾。一人把关一处安，众人把关稳如山。
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  凤凰街道综合行政执法和应急管理办公室 · 企业工厂消防安全手册 · 2026版
+</footer>
+
+</body>
+</html>
+<!-- （注：内容由AI生成） -->
